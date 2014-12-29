@@ -63,8 +63,8 @@
                 <div id="content" class="span10">
                     <?php
                     $breadcrumb = array(
-                        array("title" => "Customers"),
-                        array("title" => "Members", "url" => "admin/members"),
+                        array("title" => "CMS"),
+                        array("title"=>"Content Categories","url"=>"admin/contentcat"),
                         array("title" => "Edit"),
                     );
                     $this->load->library('breadcrumb', $breadcrumb);
@@ -73,29 +73,64 @@
                     <div class="row-fluid sortable">
                         <div class="box span12">
                             <div class="box-header" data-original-title>
-                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Edit Member</strong></h2>
+                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Edit Category</strong></h2>
                                 <div class="box-icon">
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
                                 </div>
                             </div>
                             <div class="box-content">
                                 <?= $this->messagealert->alert($alert['message'], $alert['type']); ?>
-                                <form class="form-horizontal" name="form1" id="form1" method="post" action="<?= site_url("admin/members/edit/" . $member['mem_id']); ?>">
-                                    <input name="mem_id" id="mem_id" type="hidden" value="<?= $member['mem_id']; ?>">
-                                    <input name="mem_photo" id="mem_photo" type="hidden" value="<?= $member['mem_photo']; ?>">
+                                <form class="form-horizontal" name="form1" id="form1" method="post" action="<?= site_url("admin/contentcat/edit/" . $cat['cat_id']); ?>">
+                                    <input name="cat_id" id="cat_id" type="hidden" value="<?= $cat['cat_id']; ?>">
                                     <fieldset>
                                         <div class="row">
-                                            <div class="control-group span6">
-                                                <label class="control-label">Member Type</label>
+                                            <div class="control-group span12">
+                                                <label class="control-label">Name</label>
                                                 <div class="controls">
-                                                    <select name="type_id" id="type_id">
-                                                        <option value="">--- Select Member Type ---</option>
+                                                    <input name="cat_name" id="cat_name" type="text" value="<?=$cat['cat_name'];?>" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="control-group span12">
+                                                <label class="control-label">Description</label>
+                                                <div class="controls">
+                                                    <textarea name="cat_desc" id="cat_desc" class="editor"><?=$cat['cat_desc'];?></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="control-group span6">
+                                                <label class="control-label">Language</label>
+                                                <div class="controls">
+                                                    <select name="cat_lang" id="cat_lang">
                                                         <?php
-                                                        foreach ($type as $t) {
-                                                            if ($t['type_id'] == $member['type_id']) {
-                                                                echo '<option value="' . $t['type_id'] . '" selected>' . $t['type_name'] . '</option>';
-                                                            } else {
-                                                                echo '<option value="' . $t['type_id'] . '">' . $t['type_name'] . '</option>';
+                                                        foreach($lang as $la)
+                                                        {
+                                                            if($cat['cat_lang']==$la['lang_id'])
+                                                            {
+                                                                echo '<option value="'.$la['lang_id'].'" selected>'.$la['lang_name'].'</option>';
+                                                            }else{
+                                                                echo '<option value="'.$la['lang_id'].'">'.$la['lang_name'].'</option>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="control-group span6">
+                                                <label class="control-label">Parent</label>
+                                                <div class="controls">
+                                                    <select name="cat_parent" id="cat_parent">
+                                                        <option value=""></option>
+                                                        <?php
+                                                        foreach($parentcat as $parent)
+                                                        {
+                                                            if($cat['cat_parent']==$parent['cat_id'])
+                                                            {
+                                                                echo '<option value="'.$parent['cat_id'].'" selected>'.$parent['cat_name'].'</option>';
+                                                            }else{
+                                                                echo '<option value="'.$parent['cat_id'].'">'.$parent['cat_name'].'</option>';
                                                             }
                                                         }
                                                         ?>
@@ -105,92 +140,11 @@
                                         </div>
                                         <div class="row">
                                             <div class="control-group span6">
-                                                <label class="control-label">Name & Surname</label>
-                                                <div class="controls">
-                                                    <input name="mem_fullname" id="mem_fullname" type="text" value="<?= $member['mem_fullname']; ?>" required>
-                                                </div>
-                                            </div>
-                                            <div class="control-group span6">
-                                                <label class="control-label">Nick Name</label>
-                                                <div class="controls">
-                                                    <input name="mem_nickname" id="mem_nickname" value="<?= $member['mem_nickname']; ?>" type="text">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="control-group span6">
-                                                <label class="control-label">Username</label>
-                                                <div class="controls">
-                                                    <input name="mem_username" id="mem_username" type="text" value="<?= $member['mem_password']; ?>" required>
-                                                </div>
-                                            </div>
-                                            <div class="control-group span6">
-                                                <label class="control-label">Password</label>
-                                                <div class="controls">
-                                                    <input name="mem_password" id="mem_password" type="password">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="control-group span6">
-                                                <label class="control-label">Email</label>
-                                                <div class="controls">
-                                                    <input name="mem_email" id="mem_email" type="email" value="<?= $member['mem_email']; ?>" required>
-                                                </div>
-                                            </div>
-                                            <div class="control-group span6">
-                                                <label class="control-label">Tel.</label>
-                                                <div class="controls">
-                                                    <input name="mem_mobile" id="mem_mobile" type="tel" value="<?= $member['mem_mobile']; ?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <fieldset>
-                                            <legend>Address</legend>
-                                            <div class="row">
-                                                <div class="control-group span12">
-                                                    <label class="control-label">Address</label>
-                                                    <div class="controls">
-                                                        <textarea name="mem_address" id="mem_address" ><?= $member['mem_address']; ?></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="control-group span6">
-                                                    <label class="control-label">Sub District</label>
-                                                    <div class="controls">
-                                                        <input name="mem_subdistrict" id="mem_subdistrict" value="<?= $member['mem_subdistrict']; ?>" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="control-group span6">
-                                                    <label class="control-label">District</label>
-                                                    <div class="controls">
-                                                        <input name="mem_district" id="mem_district" value="<?= $member['mem_district']; ?>" type="text">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="control-group span6">
-                                                    <label class="control-label">Province</label>
-                                                    <div class="controls">
-                                                        <input name="mem_province" id="mem_province" value="<?= $member['mem_province']; ?>" type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="control-group span6">
-                                                    <label class="control-label">Zip Code</label>
-                                                    <div class="controls">
-                                                        <input name="mem_zip" id="mem_zip" value="<?= $member['mem_zip']; ?>" type="text">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <div class="row">
-                                            <div class="control-group span6">
                                                 <label class="control-label">Status</label>
                                                 <div class="controls">
-                                                    <select name="mem_status" id="mem_status">
-                                                        <option value="1" <?= ($member['mem_status'] == 1 ? "selected" : ""); ?> >Active</option>
-                                                        <option value="0" <?= ($member['mem_status'] == 0 ? "selected" : ""); ?> >Inactive</option>
+                                                    <select name="cat_status" id="cat_status">
+                                                        <option value="1" <?= ($cat['cat_status'] == 1 ? "selected" : ""); ?> >Active</option>
+                                                        <option value="0" <?= ($cat['cat_status'] == 0 ? "selected" : ""); ?> >Inactive</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -210,6 +164,6 @@
             </div><!--/#content.span10-->
         </div><!--/fluid-row-->
         <div class="clearfix"></div>
-<?= $this->load->view('admin/footer'); ?>
+        <?= $this->load->view('admin/footer'); ?>
     </body>
 </html>

@@ -16,7 +16,7 @@
 */
 $config['base_url']	= '';
 
-$config['version'] = 'E-Commerce V0.3';
+$config['version'] = 'E-Commerce V0.4';
 
 /*
 |--------------------------------------------------------------------------

@@ -36,13 +36,23 @@ class Contentcat extends CI_Controller {
                 $this->load->view('admin/accessdeny');
             } else {
                 if (isset($_POST['cat_name'])) {
-                    $params = array(
-                        'cat_name' => $this->input->post('cat_name'),
-                        'cat_desc' => $this->input->post('cat_desc'),
-                        'cat_parent' => $this->input->post('cat_parent'),
-                        'cat_lang' => $this->input->post('cat_lang'),
-                        'cat_status' => $this->input->post('cat_status')
-                    );
+                    if($this->input->post('cat_parent')=="")
+                    {
+                        $params = array(
+                            'cat_name' => $this->input->post('cat_name'),
+                            'cat_desc' => $this->input->post('cat_desc'),
+                            'cat_lang' => $this->input->post('cat_lang'),
+                            'cat_status' => $this->input->post('cat_status')
+                        );
+                    }else{
+                        $params = array(
+                            'cat_name' => $this->input->post('cat_name'),
+                            'cat_desc' => $this->input->post('cat_desc'),
+                            'cat_parent' => $this->input->post('cat_parent'),
+                            'cat_lang' => $this->input->post('cat_lang'),
+                            'cat_status' => $this->input->post('cat_status')
+                        );
+                    }
 
                     $this->load->model("mcontentcat");
                     if ($this->mcontentcat->add($params)) {
@@ -117,7 +127,7 @@ class Contentcat extends CI_Controller {
                     ));
                     
                     $data['cat'] = $this->mcontentcat->getData(array(
-                        "where" => array("cat_id" => $id),
+                        "where" => array("f.cat_id" => $id),
                         "limit" => 1
                     ));
                     

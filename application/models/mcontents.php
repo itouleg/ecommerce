@@ -1,6 +1,6 @@
 <?php
 
-class Mcontentcat extends CI_Model {
+class Mcontents extends CI_Model {
 
     function __construct() {
         // Call the Model constructor
@@ -8,7 +8,7 @@ class Mcontentcat extends CI_Model {
     }
 
     function count() {
-        return $this->db->count_all('content_categories');
+        return $this->db->count_all('contents');
     }
 
     function getData($params = NULL) {
@@ -17,11 +17,12 @@ class Mcontentcat extends CI_Model {
             $params['limit'] = isset($params['limit']) ? $params['limit'] : 10;
         }
 
-        $cols = "f.cat_id,f.cat_name,f.cat_desc,f.cat_lang,f.cat_parent,f.cat_status,IFNULL(s.cat_id,'') as parent_id,IFNULL(s.cat_name,'') as parent_name";
+        $cols = "*";
 
-        $this->db->select($cols,false);
-        $this->db->from('content_categories as f');
-        $this->db->join("content_categories as s","s.cat_id = f.cat_parent","left");
+        $this->db->select($cols);
+        $this->db->from('contents');
+        $this->db->join("language","language.lang_id = contents.con_lang");
+        $this->db->join("content_categories","content_categories.cat_id = contents.con_catid");
 
         if (isset($params['where'])) {
             $this->db->where($params['where']);
@@ -53,33 +54,33 @@ class Mcontentcat extends CI_Model {
 
     function changeStatus($id, $value) {
         $data = array(
-            'cat_status' => $value
+            'con_status' => $value
         );
 
-        $this->db->where('cat_id', $id);
-        return $this->db->update('content_categories', $data);
+        $this->db->where('con_id', $id);
+        return $this->db->update('contents', $data);
     }
 
     function add($params) {
-        $depResult = $this->db->insert('content_categories', $params);
-        return $depResult;
+        $result = $this->db->insert('contents', $params);
+        return $result;
     }
 
     function delete($id) {
-        return $this->db->delete('content_categories', array('cat_id' => $id));
+        return $this->db->delete('contents', array('con_id' => $id));
     }
 
     function update($params) {
         $data = $params['data'];
 
-        $this->db->where('cat_id', $params['cat_id']);
-        $depResult = $this->db->update('content_categories', $data);
-        return $depResult;
+        $this->db->where('con_id', $params['con_id']);
+        $result = $this->db->update('contents', $data);
+        return $result;
     }
 
     function getMax() {
-        $this->db->select_max('cat_id');
-        $query = $this->db->get('content_categories');
+        $this->db->select_max('con_id');
+        $query = $this->db->get('contents');
         return $query->row_array();
     }
 

@@ -45,7 +45,7 @@ class Metrogridview{
             $user_permission = $CI->cuserdata->getPermission($class);
             if(isset($config['params']['cols']))
             {
-                $CI->db->select($config['params']['cols']);
+                $CI->db->select($config['params']['cols'],false);
             }else{
                 $CI->db->select("*");
             }
@@ -93,7 +93,6 @@ class Metrogridview{
             
             if(isset($config['actions']['create']))
             {
-                
                 if($user_permission['createdata']==1)
                 {
                     $url = $config['actions']['create']['url'];

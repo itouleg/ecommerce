@@ -64,55 +64,61 @@
                     <?php 
                     $breadcrumb = array(
                         array("title"=>"CMS"),
-                        array("title"=>"Content Categories","url"=>"admin/contentcat"),
+                        array("title"=>"Contents"),
                     );
                     $this->load->library('breadcrumb',$breadcrumb);
                     
                     $gridview->render(array(
-                        "title" => "Content Categories",
+                        "title" => "Contents",
                         "span" => 12,
                         "toolbar" => array(
                             "setting" => false,
                             "minimize" => true,
                             "close" => false
                         ),
-                        "model" => "content_categories f",
+                        "model" => "contents",
                         "params" => array(
-                            'cols' => "f.cat_id,f.cat_name,IF(f.cat_lang = 1,'TH','EN') as cat_lang,f.cat_status,IFNULL(s.cat_id,'') as parent_id,IFNULL(s.cat_name,'') as parent_name",
                             'join' => array(
                                 array(
-                                    'table' => 'content_categories s',
-                                    'condition'=>'s.cat_id = f.cat_parent',
-                                    'refby' => 'left'
+                                    'table' => 'language',
+                                    'condition'=>'language.lang_id = contents.con_lang'
+                                 ),
+                                array(
+                                    'table' => 'content_categories',
+                                    'condition'=>'content_categories.cat_id = contents.con_catid'
                                  )
                             )
                         ),
                         "columns" => array(
-                            "cat_id" => "ID",
-                            "cat_name" => "Name",
-                            "cat_lang" => "Lang",
-                            "parent_name" => "Main Category",
-                            "cat_status" => array(
+                            "con_title" => "Title",
+                            "cat_name" => "Category",
+                            "lang_alias" => "Lang",
+                            "con_tag" => "TAG",
+                            "con_create" => "Created",
+                            "con_status" => array(
                                 "header" => "Status",
                                 "class" => "label",
                                 "status" => array(
-                                    '<span class="label center change-status cursor" value="0" id="{cat_id}">Inactive</span>',
-                                    '<span class="label label-success center change-status cursor" value="1" id="{cat_id}">Active</span>',
-                                    '<span class="label label-important center change-status cursor" value="2" id="{cat_id}">Banned</span>',
-                                    '<span class="label label-warning center change-status cursor" value="3" id="{cat_id}">Pending</span>'
+                                    '<span class="label center change-status cursor" value="0" id="{con_id}">Inactive</span>',
+                                    '<span class="label label-success center change-status cursor" value="1" id="{con_id}">Active</span>',
+                                    '<span class="label label-important center change-status cursor" value="2" id="{con_id}">Banned</span>',
+                                    '<span class="label label-warning center change-status cursor" value="3" id="{con_id}">Pending</span>'
                                 )
-                            )
+                            ),
                         ),
                         "displayaction" => true,
                         "actions" => array(
+                            "view" => array(
+                                "url" => "contents/view/{con_id}"
+                            ),
                             "create" => array(
-                                "url" => "contentcat/create"
+                                "url" => "contents/create"
                             ),
                             "edit" => array(
-                                "url" => "contentcat/edit/{cat_id}"
+                                "url" => "contents/edit/{con_id}"
                             ),
                             "delete" => array(
-                                "url" => "contentcat/delete/{cat_id}"
+                                "url" => "contents/delete/{con_id}"
                             )
                         )
                     ));

@@ -63,9 +63,9 @@
                 <div id="content" class="span10">
                     <?php
                     $breadcrumb = array(
-                        array("title"=>"CMS"),
-                        array("title"=>"Content Categories","url"=>"admin/contentcat"),
-                        array("title" => "Create"),
+                        array("title" => "CMS"),
+                        array("title" => "Contents", "url" => "admin/contents"),
+                        array("title" => "Edit"),
                     );
                     $this->load->library('breadcrumb', $breadcrumb);
                     ?>
@@ -73,54 +73,52 @@
                     <div class="row-fluid sortable">
                         <div class="box span12">
                             <div class="box-header" data-original-title>
-                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Create Category</strong></h2>
+                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Edit Content</strong></h2>
                                 <div class="box-icon">
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
                                 </div>
                             </div>
                             <div class="box-content">
-                                <?=$this->messagealert->alert("");?>
-                                <form class="form-horizontal" name="form1" id="form1" method="post">
+                                <?=$this->messagealert->alert($alert['message'],$alert['type']);?>
+                                <form class="form-horizontal" name="form1" id="form1" method="post" action="<?=site_url("admin/contents/edit/".$content['con_id']);?>">
+                                    <input name="con_id" id="con_id" type="hidden" value="<?=$content['con_id'];?>">
                                     <fieldset>
                                         <div class="row">
                                             <div class="control-group span12">
-                                                <label class="control-label">Name</label>
+                                                <label class="control-label">Title</label>
                                                 <div class="controls">
-                                                    <input name="cat_name" id="cat_name" type="text" required>
+                                                    <input name="con_title" id="con_title" type="text" style="width:90%;" value="<?=$content['con_title'];?>" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="control-group span12">
-                                                <label class="control-label">Description</label>
+                                                <label class="control-label">Content</label>
                                                 <div class="controls">
-                                                    <textarea name="cat_desc" id="cat_desc" class="editor"></textarea>
+                                                    <textarea class="editor" name="con_content" id="con_content"><?=$content['con_content'];?></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
+                                            <div class="control-group span6">
+                                                <label class="control-label">TAG</label>
+                                                <div class="controls">
+                                                    <textarea name="con_tag" id="con_tag" style="width:100%;"><?=$content['con_tag'];?></textarea>
+                                                </div>
+                                            </div>
                                             <div class="control-group span6">
                                                 <label class="control-label">Language</label>
                                                 <div class="controls">
-                                                    <select name="cat_lang" id="cat_lang">
+                                                    <select name="con_lang" id="con_lang">
                                                         <?php
                                                         foreach($lang as $la)
                                                         {
-                                                            echo '<option value="'.$la['lang_id'].'">'.$la['lang_name'].'</option>';
-                                                        }
-                                                        ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="control-group span6">
-                                                <label class="control-label">Parent</label>
-                                                <div class="controls">
-                                                    <select name="cat_parent" id="cat_parent">
-                                                        <option value=""></option>
-                                                        <?php
-                                                        foreach($parentcat as $parent)
-                                                        {
-                                                            echo '<option value="'.$parent['cat_id'].'">'.$parent['cat_name'].'</option>';
+                                                            if($la['lang_id'] == $content['con_lang'])
+                                                            {
+                                                                echo '<option value="'.$la['lang_id'].'" selected>'.$la['lang_alias'].'</option>';
+                                                            }else{
+                                                                echo '<option value="'.$la['lang_id'].'">'.$la['lang_alias'].'</option>';
+                                                            }
                                                         }
                                                         ?>
                                                     </select>
@@ -129,11 +127,30 @@
                                         </div>
                                         <div class="row">
                                             <div class="control-group span6">
+                                                <label class="control-label">Category</label>
+                                                <div class="controls">
+                                                    <select name="con_catid" id="con_catid" required>
+                                                        <option value=""></option>
+                                                        <?php
+                                                        foreach($cat as $ca)
+                                                        {
+                                                            if($ca['cat_id'] == $content['con_catid'])
+                                                            {
+                                                                echo '<option value="'.$ca['cat_id'].'" selected>'.$ca['cat_name'].'</option>';
+                                                            }else{
+                                                                echo '<option value="'.$ca['cat_id'].'">'.$ca['cat_name'].'</option>';
+                                                            }
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="control-group span6">
                                                 <label class="control-label">Status</label>
                                                 <div class="controls">
-                                                    <select name="cat_status" id="cat_status">
-                                                        <option value="1">Active</option>
-                                                        <option value="0">Inactive</option>
+                                                    <select name="con_status" id="con_status">
+                                                        <option value="1" <?=$content['con_status']==1?"selected":"";?> >Active</option>
+                                                        <option value="0" <?=$content['con_status']==0?"selected":"";?> >Inactive</option>
                                                     </select>
                                                 </div>
                                             </div>

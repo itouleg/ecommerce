@@ -86,6 +86,17 @@
                                 <form class="form-horizontal">
                                     <div class="row">
                                         <div class="control-group span12">
+                                            <label class="control-label"><strong>E-Commerce V0.4</strong></label>
+                                            <div class="controls">
+                                                <ul>
+                                                    <li><span class="label label-info">(2014/12/29)</span> เพิ่มระบบจัดการบทความ</li>
+                                                    <li><span class="label label-info">(2014/12/29)</span> เพิ่มระบบจัดการหมวดหมู่บทความ</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="control-group span12">
                                             <label class="control-label"><strong>E-Commerce V0.3</strong></label>
                                             <div class="controls">
                                                 <ul>
@@ -144,7 +155,6 @@
                                                     <li><span class="label label-success">สินค้า</span> ส่วนลดที่ตัวสินค้าสินค้า</li>
                                                     <li><span class="label label-success">สินค้า</span> ให้เลือกได้ว่า ถ้าตัวสินค้ามีส่วนลด แล้วส่วนลดสมาชิกจากลดจากราคาสินค้าที่ลดแล้ว(default) หรือราคาสินค้าเต็ม</li>
                                                     
-                                                    <li><span class="label label-success">CMS</span> หมวดหมู่บทความ</li>
                                                     <li><span class="label label-success">CMS</span> บทความ</li>
                                                     <li><span class="label label-success">CMS</span> เมนู</li>
                                                     <li><span class="label label-success">CMS</span> แบนเนอร์</li>
