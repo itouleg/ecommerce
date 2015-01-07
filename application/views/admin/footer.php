@@ -26,7 +26,7 @@
 <script  src="<?= base_url('themes/metro/js/jquery.elfinder.min.js'); ?>"></script>
 <script  src="<?= base_url('themes/metro/js/jquery.raty.min.js'); ?>"></script>
 <script  src="<?= base_url('themes/metro/js/jquery.iphone.toggle.js'); ?>"></script>
-<script  src="<?= base_url('themes/metro/js/jquery.uploadify-3.1.min.js'); ?>"></script>
+<script  src="<?= base_url('themes/metro/js/jquery.uploadify.js'); ?>"></script>
 <script  src="<?= base_url('themes/metro/js/jquery.gritter.min.js'); ?>"></script>
 <script  src="<?= base_url('themes/metro/js/jquery.imagesloaded.js'); ?>"></script>
 <script  src="<?= base_url('themes/metro/js/jquery.masonry.min.js'); ?>"></script>
@@ -38,6 +38,11 @@
 <script type="text/javascript" src="<?=base_url('utilities/ckeditor/ckeditor.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('utilities/ckfinder/ckfinder.js');?>"></script>
 <script type="text/javascript" src="<?=base_url('utilities/ckeditor/adapters/jquery.js');?>"></script>
+<script type="text/javascript" src="<?=base_url('utilities/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js');?>"></script>
 
 <script  src="<?= base_url('themes/metro/js/custom.js'); ?>"></script>
+
+<!--<script  src="<?//= base_url('uploadify/jquery-1.4.2.min.js'); ?>"></script>
+<script  src="<?//= base_url('uploadify/jquery.uploadify.v2.1.4.min.js'); ?>"></script>-->
+
 <!-- end: JavaScript-->

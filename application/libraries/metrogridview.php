@@ -27,7 +27,7 @@ class Metrogridview{
             "actions" => isset($params['actions']) ? $params['actions'] : NULL
         );
 
-        echo '<div class="row-fluid sortable">		
+        echo '<div class="row-fluid">		
                 <div class="box span' . $config['span'] . '">
                     <div class="box-header" data-original-title>
                         <h2><i class="' . $config['icon'] . '"></i><span class="break"></span><strong>' . $config['title'] . '</strong></h2>
@@ -136,6 +136,10 @@ class Metrogridview{
                                         {
                                             echo '<td class="center">'.$this->replaceTag2Data($config['columns'][$key]['status'][$rec[$key]],$rec).'</td>';
                                         }
+                                        if(isset($config['columns'][$key]['value']))
+                                        {
+                                            echo '<td class="center">'.$this->replaceTag2Data($config['columns'][$key]['value'],$rec).'</td>';
+                                        }
                                         break;
                                 }
                             }else{
@@ -233,9 +237,16 @@ class Metrogridview{
         {
             return $list[0];
         }else{
-            $list2 = explode("}", $list[1]);
-            $value = $rec[$list2[0]];
-            $text = $list[0].$value.$list2[1];
+            $text = $list[0];
+            for($i=1;$i<count($list);$i++)
+            {
+                $list2 = explode("}", $list[$i]);
+                $value = $rec[$list2[0]];
+                $text .= $value.$list2[1];
+            }
+//            $list2 = explode("}", $list[1]);
+//            $value = $rec[$list2[0]];
+//            $text = $list[0].$value.$list2[1];
 
             return $text;
         }

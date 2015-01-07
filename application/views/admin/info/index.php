@@ -89,6 +89,7 @@
                                             <label class="control-label"><strong>E-Commerce V0.4</strong></label>
                                             <div class="controls">
                                                 <ul>
+                                                    <li><span class="label label-warning">(2014/12/29)</span> Remove Sortable in Gridview</li>
                                                     <li><span class="label label-info">(2014/12/29)</span> เพิ่มระบบจัดการบทความ</li>
                                                     <li><span class="label label-info">(2014/12/29)</span> เพิ่มระบบจัดการหมวดหมู่บทความ</li>
                                                 </ul>

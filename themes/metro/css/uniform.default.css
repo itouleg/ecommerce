@@ -19,8 +19,8 @@ div.selector,
 div.selector span, 
 div.checker span,
 div.radio span, 
-div.uploader, 
-div.uploader span.action,
+/*div.uploader, 
+div.uploader span.action,*/
 div.button,
 div.button span {
   background-image: url(../img/sprite.png);
@@ -31,12 +31,12 @@ div.button span {
 .selector, 
 .radio, 
 .checker, 
-.uploader,
+/*.uploader,*/
 .button, 
 .selector *, 
 .radio *, 
 .checker *, 
-.uploader *,
+/*.uploader *,*/
 .button *{
   margin: 0;
   padding: 0;
@@ -275,7 +275,7 @@ div.radio.disabled.active span.checked {
 
 /* Uploader */
 
-div.uploader {
+/*div.uploader {
   background-position: 0px -297px;
   height: 28px;
 }
@@ -288,7 +288,7 @@ div.uploader span.action {
 
 div.uploader span.filename {
   height: 24px;
-  /* change this line to adjust positioning of filename area */
+   change this line to adjust positioning of filename area 
   margin: 2px 0px 2px 2px;
   line-height: 24px;
 }
@@ -323,7 +323,7 @@ div.uploader.disabled {
 
 div.uploader.disabled span.action {
   background-position: right -381px;
-}
+}*/
 
 div.button {
   background-position: 0px -523px;
@@ -430,7 +430,7 @@ div.radio {
 }
 
 /* Uploader */
-div.uploader {
+/*div.uploader {
   width: 190px;
   cursor: pointer;
 }
@@ -461,7 +461,7 @@ div.uploader.disabled span.action {
 div.uploader.disabled span.filename {
   border-color: #ddd;
   color: #aaa;
-}
+}*/
 /*
 
 CORE FUNCTIONALITY 
@@ -473,8 +473,8 @@ Not advised to edit stuff below this line
 .selector, 
 .checker, 
 .button, 
-.radio, 
-.uploader {
+.radio 
+/*.uploader */{
   display: -moz-inline-box;
   display: inline-block;
   vertical-align: middle;
@@ -482,7 +482,7 @@ Not advised to edit stuff below this line
   *display: inline;
 }
 
-.selector select:focus, .radio input:focus, .checker input:focus, .uploader input:focus {
+.selector select:focus, .radio input:focus, .checker input:focus /*.uploader input:focus*/ {
   outline: 0;
 }
 
@@ -571,7 +571,7 @@ div.radio input {
 
 /* Uploader */
 
-div.uploader {
+/*div.uploader {
   position: relative;
   overflow: hidden;
   cursor: default;
@@ -606,4 +606,4 @@ div.uploader input {
   height: 25px;
   border: none;
   cursor: default;
-}
+}*/

@@ -307,6 +307,7 @@ function template_functions() {
 
     /* ---------- Datapicker ---------- */
     $('.datepicker').datepicker();
+    $('.datetimepicker').datetimepicker();
 
     /* ---------- Notifications ---------- */
     $('.noty').click(function(e) {
@@ -353,14 +354,13 @@ function template_functions() {
     $('.raty').raty({
         score: 4 //default stars
     });
-
+    
     /* ---------- Uploadify ---------- */
     $('#file_upload').uploadify({
-        'swf': 'misc/uploadify.swf',
-        'uploader': 'misc/uploadify.php'
+//        'swf': 'misc/uploadify.swf',
+//        'uploader': 'misc/uploadify.php'
                 // Put your options here
     });
-
     /* ---------- Fullscreen ---------- */
     $('#toggle-fullscreen').button().click(function() {
         var button = $(this), root = document.documentElement;

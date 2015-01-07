@@ -33,3 +33,7 @@
 <!-- start: Favicon -->
 <link rel="shortcut icon" href="<?= base_url('themes/metro/img/favicon.ico'); ?>">
 <!-- end: Favicon -->
+
+<link rel="stylesheet" href="<?=base_url('utilities/bootstrap/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css');?>">
+<link rel="stylesheet" href="<?=base_url('themes/metro/css/uploadify.css');?>">
+
