@@ -2,6 +2,11 @@
 <html lang="en">
     <head>
         <?= $this->load->view('admin/header'); ?>
+        <style>
+            .banner-img{
+                max-width: 800px !important;
+            }
+        </style>
     </head>
     <body>
         <!-- start: Header -->
@@ -64,7 +69,7 @@
                     <?php
                     $breadcrumb = array(
                         array("title" => "CMS"),
-                        array("title" => "Pages", "url" => "admin/pages"),
+                        array("title" => "Banners", "url" => "admin/banners"),
                         array("title" => "Edit"),
                     );
                     $this->load->library('breadcrumb', $breadcrumb);
@@ -73,65 +78,90 @@
                     <div class="row-fluid sortable">
                         <div class="box span12">
                             <div class="box-header" data-original-title>
-                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Edit Page</strong></h2>
+                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Edit Banner</strong></h2>
                                 <div class="box-icon">
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
                                 </div>
                             </div>
                             <div class="box-content">
                                 <?=$this->messagealert->alert($alert['message'],$alert['type']);?>
-                                <form class="form-horizontal" name="form1" id="form1" method="post" action="<?=site_url("admin/pages/edit/".$page['page_id']);?>">
-                                    <input name="page_id" id="page_id" type="hidden" value="<?=$page['page_id'];?>">
+                                <form class="form-horizontal" name="form1" id="form1" method="post" action="<?=site_url("admin/banners/edit/".$banner['banner_id']);?>">
+                                    <input name="banner_id" id="banner_id" type="hidden" value="<?=$banner['banner_id'];?>">
+                                    <input name="banner_src" id="banner_src" type="hidden" value="<?=$banner['banner_src'];?>">
+                                    <input name="banner_order" id="banner_order" type="hidden" value="<?=$banner['banner_order'];?>">
                                     <fieldset>
+                                        <div class="row">
+                                            <div class="control-group span12">
+                                                <div class="controls">
+                                                    <input type="file" name="Filedata" id="Filedata">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="control-group span12">
+                                                <label class="control-label"><label>
+                                                <div class="controls">
+                                                    <img class="banner-img img-thumbnail" id="img_show" src="/images/banners/<?=$banner['banner_src'];?>">
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row">
                                             <div class="control-group span12">
                                                 <label class="control-label">Title</label>
                                                 <div class="controls">
-                                                    <input name="page_title" id="page_title" type="text" style="width:90%;" value="<?=$page['page_title'];?>" required>
+                                                    <input name="banner_title" id="banner_title" type="text" style="width:90%;" value="<?=$banner['banner_title'];?>" required>
                                                 </div>
                                             </div>
                                         </div>
+                                        <p class="page-header"><strong>Optionals</strong></p>
                                         <div class="row">
                                             <div class="control-group span12">
-                                                <label class="control-label">Content</label>
+                                                <label class="control-label">Description</label>
                                                 <div class="controls">
-                                                    <textarea class="editor" name="page_content" id="page_content"><?=$page['page_content'];?></textarea>
+                                                    <textarea class="editor" name="banner_desc" id="banner_desc"><?=$banner['banner_desc'];?></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="control-group span6">
-                                                <label class="control-label">TAG</label>
+                                                <label class="control-label">URL</label>
                                                 <div class="controls">
-                                                    <textarea name="page_tag" id="page_tag" style="width:100%;"><?=$page['page_tag'];?></textarea>
+                                                    <input name="banner_link" id="banner_link" type="text" value="<?=$banner['banner_link'];?>">
                                                 </div>
                                             </div>
                                             <div class="control-group span6">
-                                                <label class="control-label">Language</label>
+                                                <label class="control-label">Target</label>
                                                 <div class="controls">
-                                                    <select name="page_lang" id="page_lang">
-                                                        <?php
-                                                        foreach($lang as $la)
-                                                        {
-                                                            if($la['lang_id'] == $page['page_lang'])
-                                                            {
-                                                                echo '<option value="'.$la['lang_id'].'" selected>'.$la['lang_alias'].'</option>';
-                                                            }else{
-                                                                echo '<option value="'.$la['lang_id'].'">'.$la['lang_alias'].'</option>';
-                                                            }
-                                                        }
-                                                        ?>
+                                                    <select name="banner_linktype" id="banner_linktype">
+                                                        <option value=""></option>
+                                                        <option value="_self" <?=$banner['banner_linktype']=="_self"?"selected":"";?> >Same Page</option>
+                                                        <option value="_blank" <?=$banner['banner_linktype']=="_blank"?"selected":"";?> >New Page</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="control-group span6">
+                                                <label class="control-label">Start Date</label>
+                                                <div class="controls">
+                                                    <input name="banner_startdate" id="banner_startdate" class="datepicker" type="datetime" value="<?=date("Y-m-d",strtotime($banner['banner_startdate']));?>">
+                                                </div>
+                                            </div>
+                                            <div class="control-group span6">
+                                                <label class="control-label">Expire Date</label>
+                                                <div class="controls">
+                                                    <input name="banner_expiredate" id="banner_expiredate" class="datepicker" type="datetime" value="<?=date("Y-m-d",strtotime($banner['banner_expiredate']));?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="page-header"></p>
+                                        <div class="row">
+                                            <div class="control-group span6">
                                                 <label class="control-label">Status</label>
                                                 <div class="controls">
-                                                    <select name="page_status" id="page_status">
-                                                        <option value="1" <?=$page['page_status']==1?"selected":"";?> >Active</option>
-                                                        <option value="0" <?=$page['page_status']==0?"selected":"";?> >Inactive</option>
+                                                    <select name="banner_status" id="banner_status">
+                                                        <option value="1" <?=$banner['banner_status']==1?"selected":"";?> >Active</option>
+                                                        <option value="0" <?=$banner['banner_status']==0?"selected":"";?> >Inactive</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -153,5 +183,37 @@
         </div><!--/fluid-row-->
         <div class="clearfix"></div>
         <?= $this->load->view('admin/footer'); ?>
+        <script>
+        $(function(){
+           $('#Filedata').uploadify({
+                'swf'  : '<?= base_url("themes/metro/js/uploadify.swf"); ?>',
+                'uploader':'<?=site_url("admin/banners/upload");?>',
+                //'formData':{'banner_src':''},
+                'multi' : false,
+                'auto' : true,
+                'fileTypeExts' : '*.jpg;*.gif;*.png',
+                'fileTypeDesc' : 'Image Files (.JPG, .GIF, .PNG)',
+                'fileSizeLimit' : '100MB',
+                'removeCompleted': true,
+                'buttonText' : 'SELECT FILES',
+                'method' : 'post',
+                'onUploadSuccess' : function(file, data, response) {
+                    console.log(data);
+                    var res = $.parseJSON(data);
+                    if(res.status)
+                    {
+                        console.log(res);
+                        $("#banner_src").val(res.imgname);
+                        $("#img_show").attr("src",res.src);
+                        
+                        $("#form1").submit();
+                    }
+                },
+                'onQueueComplete': function(queueData){
+                    console.log(queueData);
+                }
+            });
+        });
+        </script>
     </body>
 </html>

@@ -117,7 +117,7 @@
                                             <div class="control-group span12">
                                                 <label class="control-label">Description</label>
                                                 <div class="controls">
-                                                    <textarea class="editor" name="banner_content" id="banner_content"></textarea>
+                                                    <textarea class="editor" name="banner_desc" id="banner_desc"></textarea>
                                                 </div>
                                             </div>
                                         </div>

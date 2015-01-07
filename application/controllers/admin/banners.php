@@ -52,12 +52,12 @@ class Banners extends CI_Controller {
                     
                     if($this->input->post('banner_startdate')!="")
                     {
-                        $params['banner_startdate'] = $this->input->post('banner_startdate');
+                        $params['banner_startdate'] = date("Y-m-d",strtotime($this->input->post('banner_startdate')));
                     }
                     
                     if($this->input->post('banner_expiredate')!="")
                     {
-                        $params['banner_expiredate'] = $this->input->post('banner_expiredate');
+                        $params['banner_expiredate'] = date("Y-m-d",strtotime($this->input->post('banner_expiredate')));
                     }
 
                     if ($this->banners->add($params)) {
@@ -98,12 +98,12 @@ class Banners extends CI_Controller {
                     
                     if($this->input->post('banner_startdate')!="")
                     {
-                        $params['data']['banner_startdate'] = $this->input->post('banner_startdate');
+                        $params['data']['banner_startdate'] = date("Y-m-d",strtotime($this->input->post('banner_startdate')));
                     }
                     
                     if($this->input->post('banner_expiredate')!="")
                     {
-                        $params['data']['banner_expiredate'] = $this->input->post('banner_expiredate');
+                        $params['data']['banner_expiredate'] = date("Y-m-d",strtotime($this->input->post('banner_expiredate')));
                     }
 
                     if ($this->mbanners->update($params)) {
@@ -131,6 +131,29 @@ class Banners extends CI_Controller {
                     );
                     $this->load->view('admin/banners/edit', $data);
                 }
+            }
+        }
+    }
+    
+    public function updateorder() {
+        if (!$this->session->userdata('logged')) {
+            redirect("admin/login", "refresh");
+        } else {
+            $this->load->model("mbanners");
+            
+            $params = array(
+                'data' => array(
+                    'banner_order' => $this->input->post('banner_order'),
+                ),
+                'banner_id' => $this->input->post('banner_id')
+            );
+            if($this->mbanners->update($params))
+            {
+                $data = array("status"=>true);
+                echo json_encode($data);
+            }else{
+                $data = array("status"=>false);
+                echo json_encode($data);
             }
         }
     }

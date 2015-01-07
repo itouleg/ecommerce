@@ -87,7 +87,7 @@
                             "banner_order" => array(
                                 "header" => "Order",
                                 "class" => "label",
-                                "value" => "<input type=\"text\" class=\"order_input\" name=\"order[]\" id=\"order_{banner_id}\" value=\"{banner_order}\" >"
+                                "value" => "<input type=\"text\" class=\"order_input\" name=\"order[]\" banner_id=\"{banner_id}\" id=\"order_{banner_id}\" value=\"{banner_order}\" >"
                             ),
                             "banner_title" => "Title",
                             "banner_src" => array(
@@ -132,5 +132,29 @@
         </div><!--/fluid-row-->
         <div class="clearfix"></div>
         <?=$this->load->view('admin/footer');?>
+        <script>
+            $(function(){
+               $(".order_input").keyup(function(event){
+                   if(event.keyCode===13)
+                   {
+                       var bannerid = $(this).attr("banner_id");
+                       var order = $(this).val();
+                       
+                       $.ajax({
+                           url:"<?=site_url('admin/banners/updateorder');?>",
+                           type:"post",
+                           data:{banner_id:bannerid,banner_order:order},
+                           success:function(response){
+                               var res = $.parseJSON(response);
+                               if(res.status===true)
+                               {
+                                   window.location.href="";
+                               }
+                           }
+                       });
+                   }
+               }) ;
+            });
+        </script>
     </body>
 </html>

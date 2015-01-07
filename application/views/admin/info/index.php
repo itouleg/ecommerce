@@ -89,6 +89,7 @@
                                             <label class="control-label"><strong>E-Commerce V0.4</strong></label>
                                             <div class="controls">
                                                 <ul>
+                                                    <li><span class="label label-success">(2015/01/07)</span> เพิ่มระบบจัดการ Banners</li>
                                                     <li><span class="label label-warning">(2014/12/29)</span> Remove Sortable in Gridview</li>
                                                     <li><span class="label label-info">(2014/12/29)</span> เพิ่มระบบจัดการบทความ</li>
                                                     <li><span class="label label-info">(2014/12/29)</span> เพิ่มระบบจัดการหมวดหมู่บทความ</li>
@@ -158,7 +159,6 @@
                                                     
                                                     <li><span class="label label-success">CMS</span> บทความ</li>
                                                     <li><span class="label label-success">CMS</span> เมนู</li>
-                                                    <li><span class="label label-success">CMS</span> แบนเนอร์</li>
                                                     <li><span class="label label-success">CMS</span> Gallery</li>
                                                     <li><span class="label label-success">CMS</span> หมวดหมู่ Gallery</li>
                                                     <li><span class="label label-success">CMS</span> Slide</li>
