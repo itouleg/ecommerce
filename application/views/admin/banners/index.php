@@ -90,7 +90,11 @@
                                 "value" => "<input type=\"text\" class=\"order_input\" name=\"order[]\" id=\"order_{banner_id}\" value=\"{banner_order}\" >"
                             ),
                             "banner_title" => "Title",
-                            "banner_src" => "Pic",
+                            "banner_src" => array(
+                                "header" => "Pic",
+                                "class" => "label",
+                                "value" => '<img src="/images/banners/{banner_src}" style="height:60px;">'
+                            ),
                             "banner_link" => "URL",
                             "banner_create" => "Create",
                             "banner_startdate" => "Start",
