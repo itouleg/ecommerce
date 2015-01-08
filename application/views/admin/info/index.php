@@ -89,6 +89,7 @@
                                             <label class="control-label"><strong>E-Commerce V0.4</strong></label>
                                             <div class="controls">
                                                 <ul>
+                                                    <li><span class="label label-success">(2015/01/08)</span> เพิ่มระบบจัดการ Gallery</li>
                                                     <li><span class="label label-success">(2015/01/07)</span> เพิ่มระบบจัดการ Banners</li>
                                                     <li><span class="label label-warning">(2014/12/29)</span> Remove Sortable in Gridview</li>
                                                     <li><span class="label label-info">(2014/12/29)</span> เพิ่มระบบจัดการบทความ</li>
@@ -157,10 +158,7 @@
                                                     <li><span class="label label-success">สินค้า</span> ส่วนลดที่ตัวสินค้าสินค้า</li>
                                                     <li><span class="label label-success">สินค้า</span> ให้เลือกได้ว่า ถ้าตัวสินค้ามีส่วนลด แล้วส่วนลดสมาชิกจากลดจากราคาสินค้าที่ลดแล้ว(default) หรือราคาสินค้าเต็ม</li>
                                                     
-                                                    <li><span class="label label-success">CMS</span> บทความ</li>
                                                     <li><span class="label label-success">CMS</span> เมนู</li>
-                                                    <li><span class="label label-success">CMS</span> Gallery</li>
-                                                    <li><span class="label label-success">CMS</span> หมวดหมู่ Gallery</li>
                                                     <li><span class="label label-success">CMS</span> Slide</li>
                                                     
                                                     <li><span class="label label-success">Shops</span> Currency Exchange</li>
