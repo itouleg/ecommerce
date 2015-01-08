@@ -159,7 +159,6 @@
                                                     <li><span class="label label-success">สินค้า</span> ให้เลือกได้ว่า ถ้าตัวสินค้ามีส่วนลด แล้วส่วนลดสมาชิกจากลดจากราคาสินค้าที่ลดแล้ว(default) หรือราคาสินค้าเต็ม</li>
                                                     
                                                     <li><span class="label label-success">CMS</span> เมนู</li>
-                                                    <li><span class="label label-success">CMS</span> Slide</li>
                                                     
                                                     <li><span class="label label-success">Shops</span> Currency Exchange</li>
                                                     <li><span class="label label-success">Shops</span> Shipping Rates</li>
