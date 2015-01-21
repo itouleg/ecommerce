@@ -40,7 +40,8 @@ class Currency extends CI_Controller {
                         'currency_code' => $this->input->post('currency_code'),
                         'currency_name' => $this->input->post('currency_name'),
                         'currency_symbol' => $this->input->post('currency_symbol'),
-                        'currency_rate' => $this->input->post('currency_rate'),
+                        'currency_buy' => $this->input->post('currency_buy'),
+                        'currency_sell' => $this->input->post('currency_sell'),
                         'currency_status' => $this->input->post('currency_status')
                     );
 
@@ -70,7 +71,8 @@ class Currency extends CI_Controller {
                             'currency_code' => $this->input->post('currency_code'),
                             'currency_name' => $this->input->post('currency_name'),
                             'currency_symbol' => $this->input->post('currency_symbol'),
-                            'currency_rate' => $this->input->post('currency_rate'),
+                            'currency_buy' => $this->input->post('currency_buy'),
+                            'currency_sell' => $this->input->post('currency_sell'),
                             'currency_status' => $this->input->post('currency_status')
                         ),
                         'currency_id' => $this->input->post('currency_id')

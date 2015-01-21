@@ -81,7 +81,8 @@
                         "columns" => array(
                             "currency_name" => "Currency",
                             "currency_code" => "Code",
-                            "currency_rate" => "Rate",
+                            "currency_buy" => "Buy",
+                            "currency_sell" => "Sell",
                             "currency_symbol" => "Symbols",
                             "currency_status" => array(
                                 "header" => "Status",
