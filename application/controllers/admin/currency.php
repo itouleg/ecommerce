@@ -3,7 +3,7 @@
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Banks extends CI_Controller {
+class Currency extends CI_Controller {
 
     public $user_permission;
 
@@ -23,7 +23,7 @@ class Banks extends CI_Controller {
                 $this->load->library('metrogridview', '', 'gridview');
                 $data['gridview'] = $this->gridview;
 
-                $this->load->view('admin/banks/index', $data);
+                $this->load->view('admin/currency/index', $data);
             }
         }
     }
@@ -35,21 +35,21 @@ class Banks extends CI_Controller {
             if (!$this->user_permission['createdata'] == 1) {
                 $this->load->view('admin/accessdeny');
             } else {
-                if (isset($_POST['bank_name'])) {
+                if (isset($_POST['currency_code'])) {
                     $params = array(
-                        'bank_name' => $this->input->post('bank_name'),
-                        'bank_branch' => $this->input->post('bank_branch'),
-                        'bank_holder' => $this->input->post('bank_holder'),
-                        'bank_accountno' => $this->input->post('bank_accountno'),
-                        'bank_status' => $this->input->post('bank_status')
+                        'currency_code' => $this->input->post('currency_code'),
+                        'currency_name' => $this->input->post('currency_name'),
+                        'currency_symbol' => $this->input->post('currency_symbol'),
+                        'currency_rate' => $this->input->post('currency_rate'),
+                        'currency_status' => $this->input->post('currency_status')
                     );
 
-                    $this->load->model("mbanks", "banks");
-                    if ($this->banks->add($params)) {
-                        redirect("admin/banks", "refresh");
+                    $this->load->model("mcurrency");
+                    if ($this->mcurrency->add($params)) {
+                        redirect("admin/currency", "refresh");
                     }
                 } else {
-                    $this->load->view('admin/banks/create');
+                    $this->load->view('admin/currency/create');
                 }
             }
         }
@@ -62,24 +62,24 @@ class Banks extends CI_Controller {
             if (!$this->user_permission['updatedata'] == 1) {
                 $this->load->view('admin/accessdeny');
             } else {
-                $this->load->model("mbanks");
+                $this->load->model("mcurrency");
 
-                if (isset($_POST['bank_name'])) {
+                if (isset($_POST['currency_code'])) {
                     $params = array(
                         'data' => array(
-                            'bank_name' => $this->input->post('bank_name'),
-                            'bank_branch' => $this->input->post('bank_branch'),
-                            'bank_holder' => $this->input->post('bank_holder'),
-                            'bank_accountno' => $this->input->post('bank_accountno'),
-                            'bank_status' => $this->input->post('bank_status')
+                            'currency_code' => $this->input->post('currency_code'),
+                            'currency_name' => $this->input->post('currency_name'),
+                            'currency_symbol' => $this->input->post('currency_symbol'),
+                            'currency_rate' => $this->input->post('currency_rate'),
+                            'currency_status' => $this->input->post('currency_status')
                         ),
-                        'bank_id' => $this->input->post('bank_id')
+                        'currency_id' => $this->input->post('currency_id')
                     );
 
-                    if ($this->mbanks->update($params)) {
+                    if ($this->mcurrency->update($params)) {
 
-                        $data['bank'] = $this->mbanks->getData(array(
-                            "where" => array("bank_id" => $id),
+                        $data['currency'] = $this->mcurrency->getData(array(
+                            "where" => array("currency_id" => $id),
                             "limit" => 1
                         ));
                         $data['alert'] = array(
@@ -87,19 +87,19 @@ class Banks extends CI_Controller {
                             'message' => 'Update successful.'
                         );
 
-                        $this->load->view('admin/banks/edit', $data);
+                        $this->load->view('admin/currency/edit', $data);
                     }
                 } else {
 
-                    $data['bank'] = $this->mbanks->getData(array(
-                        "where" => array("bank_id" => $id),
+                    $data['currency'] = $this->mcurrency->getData(array(
+                        "where" => array("currency_id" => $id),
                         "limit" => 1
                     ));
                     $data['alert'] = array(
                         'type' => NULL,
                         'message' => NULL
                     );
-                    $this->load->view('admin/banks/edit', $data);
+                    $this->load->view('admin/currency/edit', $data);
                 }
             }
         }
@@ -112,9 +112,9 @@ class Banks extends CI_Controller {
             if (!$this->user_permission['deletedata'] == 1) {
                 $this->load->view('admin/accessdeny');
             } else {
-                $this->load->model("mbanks");
-                $this->mbanks->delete($id);
-                redirect("admin/banks", "refresh");
+                $this->load->model("mcurrency");
+                $this->mcurrency->delete($id);
+                redirect("admin/currency", "refresh");
             }
         }
     }
