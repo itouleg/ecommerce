@@ -63,62 +63,45 @@
                 <div id="content" class="span10">
                     <?php 
                     $breadcrumb = array(
-                        array("title"=>"Users"),
-                        array("title"=>"Employee","url"=>"admin/employee"),
+                        array("title"=>"Shop"),
+                        array("title"=>"Brands"),
                     );
                     $this->load->library('breadcrumb',$breadcrumb);
                     
                     $gridview->render(array(
-                        "title" => "Employee",
+                        "title" => "Brands",
                         "span" => 12,
                         "toolbar" => array(
                             "setting" => false,
                             "minimize" => true,
                             "close" => false
                         ),
-                        "model" => "users",
-                        "params" => array(
-                            'join' => array(
-                                array(
-                                    'table' => 'departments',
-                                    'condition'=>'departments.dep_id = users.dep_id'
-                                 )
-                            ),
-                            'where' => array(
-                                'user_id !='=>1
-                            )
-                        ),
+                        "model" => "brands",
+                        "params" => NULL,
                         "columns" => array(
-                            "user_id" => "ID",
-                            "user_fullname" => "Name",
-                            "user_username" => "Username",
-                            "user_email" => "Email",
-                            "user_mobile" => "Mobile",
-                            "dep_name" => "Department",
-                            "user_status" => array(
+                            "brand_id" => "ID",
+                            "brand_name" => "Brand Name",
+                            "brand_status" => array(
                                 "header" => "Status",
                                 "class" => "label",
                                 "status" => array(
-                                    '<span class="label center change-status cursor" value="0" id="{user_id}">Inactive</span>',
-                                    '<span class="label label-success center change-status cursor" value="1" id="{user_id}">Active</span>',
-                                    '<span class="label label-important center change-status cursor" value="2" id="{user_id}">Banned</span>',
-                                    '<span class="label label-warning center change-status cursor" value="3" id="{user_id}">Pending</span>'
+                                    '<span class="label center change-status cursor" value="0" id="{brand_id}">Inactive</span>',
+                                    '<span class="label label-success center change-status cursor" value="1" id="{brand_id}">Active</span>',
+                                    '<span class="label label-important center change-status cursor" value="2" id="{brand_id}">Banned</span>',
+                                    '<span class="label label-warning center change-status cursor" value="3" id="{brand_id}">Pending</span>'
                                 )
                             )
                         ),
                         "displayaction" => true,
                         "actions" => array(
                             "create" => array(
-                                "url" => "employee/create"
-                            ),
-                            "view" => array(
-                                "url" => "employee/view/{user_id}"
+                                "url" => "brands/create"
                             ),
                             "edit" => array(
-                                "url" => "employee/edit/{user_id}"
+                                "url" => "brands/edit/{brand_id}"
                             ),
                             "delete" => array(
-                                "url" => "employee/delete/{user_id}"
+                                "url" => "brands/delete/{brand_id}"
                             )
                         )
                     ));

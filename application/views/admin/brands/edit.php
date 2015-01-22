@@ -64,8 +64,8 @@
                     <?php
                     $breadcrumb = array(
                         array("title" => "Shop"),
-                        array("title" => "Currency", "url" => "admin/currency"),
-                        array("title" => "Create"),
+                        array("title" => "Brands", "url" => "admin/brands"),
+                        array("title" => "Edit"),
                     );
                     $this->load->library('breadcrumb', $breadcrumb);
                     ?>
@@ -73,46 +73,21 @@
                     <div class="row-fluid sortable">
                         <div class="box span12">
                             <div class="box-header" data-original-title>
-                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Create Bank</strong></h2>
+                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Edit Brand</strong></h2>
                                 <div class="box-icon">
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
                                 </div>
                             </div>
                             <div class="box-content">
-                                <?=$this->messagealert->alert("");?>
-                                <form class="form-horizontal" name="form1" id="form1" method="post">
+                                <?=$this->messagealert->alert($alert['message'],$alert['type']);?>
+                                <form class="form-horizontal" name="form1" id="form1" method="post" action="<?=site_url("admin/brands/edit/".$brand['brand_id']);?>">
+                                    <input name="brand_id" id="brand_id" type="hidden" value="<?=$brand['brand_id'];?>">
                                     <fieldset>
                                         <div class="row">
                                             <div class="control-group span6">
-                                                <label class="control-label">Currency Name</label>
+                                                <label class="control-label">Brand Name</label>
                                                 <div class="controls">
-                                                    <input name="currency_name" id="currency_name" type="text" placeholder="e.g. Thai Baht" required>
-                                                </div>
-                                            </div>
-                                            <div class="control-group span6">
-                                                <label class="control-label">Rate</label>
-                                                <div class="controls">
-                                                    <input name="currency_rate" id="currency_rate" type="text" placeholder="0.00" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="control-group span6">
-                                                <label class="control-label">Code</label>
-                                                <div class="controls">
-                                                    <input name="currency_code" id="currency_code" type="text" placeholder="e.g. THB" required>
-                                                </div>
-                                            </div>
-                                            <div class="control-group span6">
-                                                <label class="control-label">Symbol</label>
-                                                <div class="controls">
-                                                    <select name="currency_symbol" id="currency_symbol">
-                                                        <option value="฿">Baht (฿)</option>
-                                                        <option value="$">Dollar ($)</option>
-                                                        <option value="¥">Yuan (¥)</option>
-                                                        <option value="€">Euro (€)</option>
-                                                        <option value="£">Pound (£)</option>
-                                                    </select>
+                                                    <input name="brand_name" id="brand_name" type="text" value="<?=$brand['brand_name'];?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -120,9 +95,9 @@
                                             <div class="control-group span6">
                                                 <label class="control-label">Status</label>
                                                 <div class="controls">
-                                                    <select name="currency_status" id="currency_status">
-                                                        <option value="1">Active</option>
-                                                        <option value="0">Inactive</option>
+                                                    <select name="brand_status" id="brand_status">
+                                                        <option value="1" <?=$brand['brand_status']==1?"selected":"";?> >Active</option>
+                                                        <option value="0" <?=$brand['brand_status']==0?"selected":"";?> >Inactive</option>
                                                     </select>
                                                 </div>
                                             </div>

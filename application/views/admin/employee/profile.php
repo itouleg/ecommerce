@@ -63,9 +63,9 @@
                 <div id="content" class="span10">
                     <?php
                     $breadcrumb = array(
-                        array("title" => "Shop"),
-                        array("title" => "Currency", "url" => "admin/currency"),
-                        array("title" => "Create"),
+                        array("title"=>"Users"),
+                        array("title"=>"Employee","url"=>"admin/employee"),
+                        array("title" => "Edit Profile"),
                     );
                     $this->load->library('breadcrumb', $breadcrumb);
                     ?>
@@ -73,57 +73,64 @@
                     <div class="row-fluid sortable">
                         <div class="box span12">
                             <div class="box-header" data-original-title>
-                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Create Bank</strong></h2>
+                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Edit Profile</strong></h2>
                                 <div class="box-icon">
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
                                 </div>
                             </div>
                             <div class="box-content">
-                                <?=$this->messagealert->alert("");?>
-                                <form class="form-horizontal" name="form1" id="form1" method="post">
+                                <?=$this->messagealert->alert($alert['message'],$alert['type']);?>
+                                <form class="form-horizontal" name="form1" id="form1" method="post" action="<?=site_url("admin/employee/profile");?>">
+                                    <input name="dep_id" id="dep_id" type="hidden" value="<?=$user['dep_id'];?>">
+                                    <input name="user_status" id="user_status" type="hidden" value="<?=$user['user_status'];?>" >
                                     <fieldset>
                                         <div class="row">
                                             <div class="control-group span6">
-                                                <label class="control-label">Currency Name</label>
+                                                <label class="control-label">Name</label>
                                                 <div class="controls">
-                                                    <input name="currency_name" id="currency_name" type="text" placeholder="e.g. Thai Baht" required>
+                                                    <input name="user_fullname" id="user_fullname" type="text" value="<?=$user['user_fullname'];?>" required>
                                                 </div>
                                             </div>
                                             <div class="control-group span6">
-                                                <label class="control-label">Rate</label>
+                                                <label class="control-label">Departments</label>
                                                 <div class="controls">
-                                                    <input name="currency_rate" id="currency_rate" type="text" placeholder="0.00" required>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="control-group span6">
-                                                <label class="control-label">Code</label>
-                                                <div class="controls">
-                                                    <input name="currency_code" id="currency_code" type="text" placeholder="e.g. THB" required>
-                                                </div>
-                                            </div>
-                                            <div class="control-group span6">
-                                                <label class="control-label">Symbol</label>
-                                                <div class="controls">
-                                                    <select name="currency_symbol" id="currency_symbol">
-                                                        <option value="฿">Baht (฿)</option>
-                                                        <option value="$">Dollar ($)</option>
-                                                        <option value="¥">Yuan (¥)</option>
-                                                        <option value="€">Euro (€)</option>
-                                                        <option value="£">Pound (£)</option>
-                                                    </select>
+                                                    <?php
+                                                    foreach($department as $dep)
+                                                    {
+                                                        if($user['dep_id']==$dep['dep_id'])
+                                                        {
+                                                            echo '<input type="text" value="'.$dep['dep_name'].'" disabled>';
+                                                        }
+                                                    }
+                                                    ?>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="control-group span6">
-                                                <label class="control-label">Status</label>
+                                                <label class="control-label">Username</label>
                                                 <div class="controls">
-                                                    <select name="currency_status" id="currency_status">
-                                                        <option value="1">Active</option>
-                                                        <option value="0">Inactive</option>
-                                                    </select>
+                                                    <input name="user_username" id="user_username" type="text" value="<?=$user['user_username'];?>" readonly required>
+                                                </div>
+                                            </div>
+                                            <div class="control-group span6">
+                                                <label class="control-label">Password</label>
+                                                <div class="controls">
+                                                    <input name="user_password" id="user_password" type="password">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="control-group span6">
+                                                <label class="control-label">Email</label>
+                                                <div class="controls">
+                                                    <input name="user_email" id="user_email" type="email" value="<?=$user['user_email'];?>" required>
+                                                </div>
+                                            </div>
+                                            <div class="control-group span6">
+                                                <label class="control-label">Mobile</label>
+                                                <div class="controls">
+                                                    <input name="user_mobile" id="user_mobile" type="tel" value="<?=$user['user_mobile'];?>">
                                                 </div>
                                             </div>
                                         </div>

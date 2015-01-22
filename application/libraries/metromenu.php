@@ -40,7 +40,7 @@ class MetroMenu
                                 $icon = isset($item['icon'])?$item['icon']:"";
                                 $title = isset($item['title'])?$item['title']:"No Title";
                                 $notif = isset($item['notification'])?($item['notification']['active']?'<span class="label label-important"> '.$item['notification']['text'].' </span>':''):'';
-                                
+
                                 echo '<li '.$class.'><a class="submenu" href="'.$url.'"><i class="'.$icon.'"></i><span class="hidden-tablet"> '.$title.'</span> '.$notif.'</a></li>';
                             }
                         }

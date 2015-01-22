@@ -67,7 +67,58 @@
                         array("title"=>"Currency Exchange"),
                     );
                     $this->load->library('breadcrumb',$breadcrumb);
-                    
+                    ?>
+                    <div class="row-fluid">
+                        <div class="box span12">
+                            <div class="box-header" data-original-title="">
+                                <h2><i class="halflings-icon th-large"></i><span class="break"></span><strong>Currency Exchange</strong></h2>
+                                <div class="box-icon">
+                                    <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+                                </div>
+                            </div>
+                            <div class="box-content">
+                                <form class="form-horizontal">
+                                <fieldset>
+                                    <div class="row">
+                                        <div class="control-group span6">
+                                            <label class="control-label">Currency</label>
+                                            <div class="controls">
+                                                <select name="currency" id="currency">
+                                                    <?php                  
+                                                    foreach($currency as $cur)
+                                                    {
+                                                        echo '<option value="'.$cur['currency_rate'].'">('.$cur['currency_symbol'].')'.$cur['currency_name'].'</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="control-group span6">
+                                            <label class="control-label">Price</label>
+                                            <div class="controls">
+                                                <input type="text" name="price" id="price" placeholder="0.00" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="control-group span6">
+                                            <label class="control-label">THB</label>
+                                            <div class="controls">
+                                                <input type="text" name="THB" id="THB" placeholder="0.00" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="control-group span6">
+                                            <div class="controls">
+                                                <button id="calc-btn" type="button" class="btn btn-primary">Calculate</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <?php
                     $gridview->render(array(
                         "title" => "Currency Exchange",
                         "span" => 12,
@@ -81,8 +132,7 @@
                         "columns" => array(
                             "currency_name" => "Currency",
                             "currency_code" => "Code",
-                            "currency_buy" => "Buy",
-                            "currency_sell" => "Sell",
+                            "currency_rate" => "Rate",
                             "currency_symbol" => "Symbols",
                             "currency_status" => array(
                                 "header" => "Status",
@@ -117,5 +167,14 @@
         </div><!--/fluid-row-->
         <div class="clearfix"></div>
         <?=$this->load->view('admin/footer');?>
+        <script>
+            $(function(){
+               $("#calc-btn").click(function(){
+                   var rate = parseFloat($("#currency option:selected").val());
+                   var price = parseFloat($("#price").val());
+                   $("#THB").val(rate*price);
+               }); 
+            });
+        </script>
     </body>
 </html>

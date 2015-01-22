@@ -63,62 +63,77 @@
                 <div id="content" class="span10">
                     <?php 
                     $breadcrumb = array(
-                        array("title"=>"Users"),
-                        array("title"=>"Employee","url"=>"admin/employee"),
+                        array("title"=>"Shop"),
+                        array("title"=>"Shipping Rates"),
                     );
                     $this->load->library('breadcrumb',$breadcrumb);
                     
+                    $cols = "ship_id,ship_weightfrom,ship_weightto,ship_price,ship_price_yuan,ship_status,"
+                                . "f.country_name as ship_fromname,"
+                                . "t.country_name as ship_toname,"
+                                . "mass_name,"
+                                . "massby_name";
+                    
                     $gridview->render(array(
-                        "title" => "Employee",
+                        "title" => "Shipping Rates",
                         "span" => 12,
                         "toolbar" => array(
                             "setting" => false,
                             "minimize" => true,
                             "close" => false
                         ),
-                        "model" => "users",
+                        "model" => "shipping_rate",
                         "params" => array(
+                            'cols' => $cols,
                             'join' => array(
                                 array(
-                                    'table' => 'departments',
-                                    'condition'=>'departments.dep_id = users.dep_id'
+                                    'table' => 'country as f',
+                                    'condition'=>"f.country_id = shipping_rate.ship_from"
+                                 ),
+                                array(
+                                    'table' => 'country as t',
+                                    'condition'=>"t.country_id = shipping_rate.ship_to"
+                                 ),
+                                array(
+                                    'table' => 'masstype',
+                                    'condition'=>"masstype.mass_id = shipping_rate.ship_type"
+                                 ),
+                                array(
+                                    'table' => 'massby',
+                                    'condition'=>"massby.massby_id = shipping_rate.ship_by"
                                  )
-                            ),
-                            'where' => array(
-                                'user_id !='=>1
                             )
                         ),
                         "columns" => array(
-                            "user_id" => "ID",
-                            "user_fullname" => "Name",
-                            "user_username" => "Username",
-                            "user_email" => "Email",
-                            "user_mobile" => "Mobile",
-                            "dep_name" => "Department",
-                            "user_status" => array(
+                            "ship_fromname" => "From",
+                            "ship_toname" => "To",
+                            "mass_name" => "Type",
+                            "massby_name" => "By",
+                            "ship_weightfrom" => "Weight(From)",
+                            "ship_weightto" => "Weight(To)",
+                            "ship_price" => "Price(THB)/g.",
+                            "ship_price_yuan" => "Price(CNY)/g.",
+                            "ship_status" => array(
                                 "header" => "Status",
                                 "class" => "label",
                                 "status" => array(
-                                    '<span class="label center change-status cursor" value="0" id="{user_id}">Inactive</span>',
-                                    '<span class="label label-success center change-status cursor" value="1" id="{user_id}">Active</span>',
-                                    '<span class="label label-important center change-status cursor" value="2" id="{user_id}">Banned</span>',
-                                    '<span class="label label-warning center change-status cursor" value="3" id="{user_id}">Pending</span>'
+                                    '<span class="label center change-status cursor" value="0" id="{ship_id}">Inactive</span>',
+                                    '<span class="label label-success center change-status cursor" value="1" id="{ship_id}">Active</span>',
+                                    '<span class="label label-important center change-status cursor" value="2" id="{ship_id}">Banned</span>',
+                                    '<span class="label label-warning center change-status cursor" value="3" id="{ship_id}">Pending</span>'
                                 )
                             )
                         ),
                         "displayaction" => true,
                         "actions" => array(
                             "create" => array(
-                                "url" => "employee/create"
-                            ),
-                            "view" => array(
-                                "url" => "employee/view/{user_id}"
+                                "url" => "shippingrates/create"
                             ),
                             "edit" => array(
-                                "url" => "employee/edit/{user_id}"
+                                "url" => "shippingrates/edit/{ship_id}"
                             ),
                             "delete" => array(
-                                "url" => "employee/delete/{user_id}"
+                                "url" => "shippingrates/delete/{ship_id}"
                             )
                         )
                     ));

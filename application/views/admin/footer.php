@@ -18,7 +18,7 @@
 <script  src="<?= base_url('themes/metro/js/jquery.flot.js'); ?>"></script>
 <script  src="<?= base_url('themes/metro/js/jquery.flot.pie.js'); ?>"></script>
 <script  src="<?= base_url('themes/metro/js/jquery.flot.stack.js'); ?>"></script>
-<!--<script  src="<? //= base_url('themes/metro/js/jquery.flot.resize.min.js'); ?>"></script>-->
+<script  src="<?= base_url('themes/metro/js/jquery.flot.resize.min.js'); ?>"></script>
 <script  src="<?= base_url('themes/metro/js/jquery.chosen.min.js'); ?>"></script>
 <script  src="<?= base_url('themes/metro/js/jquery.uniform.min.js'); ?>"></script>
 <script  src="<?= base_url('themes/metro/js/jquery.cleditor.min.js'); ?>"></script>
@@ -41,8 +41,5 @@
 <script type="text/javascript" src="<?=base_url('utilities/bootstrap/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js');?>"></script>
 
 <script  src="<?= base_url('themes/metro/js/custom.js'); ?>"></script>
-
-<!--<script  src="<?//= base_url('uploadify/jquery-1.4.2.min.js'); ?>"></script>
-<script  src="<?//= base_url('uploadify/jquery.uploadify.v2.1.4.min.js'); ?>"></script>-->
 
 <!-- end: JavaScript-->

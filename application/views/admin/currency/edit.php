@@ -90,18 +90,10 @@
                                                     <input name="currency_name" id="currency_name" type="text" placeholder="e.g. Thai Baht" value="<?=$currency['currency_name'];?>" required>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="control-group span6">
-                                                <label class="control-label">Buy</label>
+                                                <label class="control-label">Rate</label>
                                                 <div class="controls">
-                                                    <input name="currency_buy" id="currency_buy" type="text" placeholder="0.00" value="<?=$currency['currency_buy'];?>" required>
-                                                </div>
-                                            </div>
-                                            <div class="control-group span6">
-                                                <label class="control-label">Sell</label>
-                                                <div class="controls">
-                                                    <input name="currency_sell" id="currency_sell" type="text" placeholder="0.00" value="<?=$currency['currency_sell'];?>" required>
+                                                    <input name="currency_rate" id="currency_rate" type="text" placeholder="0.00" value="<?=$currency['currency_buy'];?>" required>
                                                 </div>
                                             </div>
                                         </div>

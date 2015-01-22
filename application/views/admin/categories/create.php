@@ -63,8 +63,8 @@
                 <div id="content" class="span10">
                     <?php
                     $breadcrumb = array(
-                        array("title" => "Shop"),
-                        array("title" => "Currency", "url" => "admin/currency"),
+                        array("title"=>"Shop"),
+                        array("title"=>"Categories","url"=>"admin/categories"),
                         array("title" => "Create"),
                     );
                     $this->load->library('breadcrumb', $breadcrumb);
@@ -73,7 +73,7 @@
                     <div class="row-fluid sortable">
                         <div class="box span12">
                             <div class="box-header" data-original-title>
-                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Create Bank</strong></h2>
+                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Create Category</strong></h2>
                                 <div class="box-icon">
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
                                 </div>
@@ -84,43 +84,37 @@
                                     <fieldset>
                                         <div class="row">
                                             <div class="control-group span6">
-                                                <label class="control-label">Currency Name</label>
+                                                <label class="control-label">Name</label>
                                                 <div class="controls">
-                                                    <input name="currency_name" id="currency_name" type="text" placeholder="e.g. Thai Baht" required>
+                                                    <input name="cat_name" id="cat_name" type="text" required>
                                                 </div>
                                             </div>
                                             <div class="control-group span6">
-                                                <label class="control-label">Rate</label>
+                                                <label class="control-label">Name(EN)</label>
                                                 <div class="controls">
-                                                    <input name="currency_rate" id="currency_rate" type="text" placeholder="0.00" required>
+                                                    <input name="cat_name_en" id="cat_name_en" type="text">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="control-group span6">
-                                                <label class="control-label">Code</label>
+                                                <label class="control-label">Parent</label>
                                                 <div class="controls">
-                                                    <input name="currency_code" id="currency_code" type="text" placeholder="e.g. THB" required>
-                                                </div>
-                                            </div>
-                                            <div class="control-group span6">
-                                                <label class="control-label">Symbol</label>
-                                                <div class="controls">
-                                                    <select name="currency_symbol" id="currency_symbol">
-                                                        <option value="฿">Baht (฿)</option>
-                                                        <option value="$">Dollar ($)</option>
-                                                        <option value="¥">Yuan (¥)</option>
-                                                        <option value="€">Euro (€)</option>
-                                                        <option value="£">Pound (£)</option>
+                                                    <select name="cat_parent" id="cat_parent">
+                                                        <option value=""></option>
+                                                        <?php
+                                                        foreach($parentcat as $parent)
+                                                        {
+                                                            echo '<option value="'.$parent['cat_id'].'">'.$parent['cat_name'].'</option>';
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="control-group span6">
                                                 <label class="control-label">Status</label>
                                                 <div class="controls">
-                                                    <select name="currency_status" id="currency_status">
+                                                    <select name="cat_status" id="cat_status">
                                                         <option value="1">Active</option>
                                                         <option value="0">Inactive</option>
                                                     </select>

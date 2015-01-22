@@ -2,6 +2,11 @@
 <html lang="en">
     <head>
         <?=$this->load->view('admin/header');?>
+        <style>
+            .order_input{
+                width:50px;
+            }
+        </style>
     </head>
     <body>
         <!-- start: Header -->
@@ -63,62 +68,61 @@
                 <div id="content" class="span10">
                     <?php 
                     $breadcrumb = array(
-                        array("title"=>"Users"),
-                        array("title"=>"Employee","url"=>"admin/employee"),
+                        array("title"=>"Shop"),
+                        array("title"=>"Categories","url"=>"admin/categories"),
                     );
                     $this->load->library('breadcrumb',$breadcrumb);
                     
                     $gridview->render(array(
-                        "title" => "Employee",
+                        "title" => "Categories",
                         "span" => 12,
                         "toolbar" => array(
                             "setting" => false,
                             "minimize" => true,
                             "close" => false
                         ),
-                        "model" => "users",
+                        "model" => "categories f",
                         "params" => array(
+                            'cols' => "f.cat_id,f.cat_name,f.cat_name_en,f.cat_order,f.cat_status,IFNULL(s.cat_id,'') as parent_id,IFNULL(s.cat_name,'') as parent_name",
                             'join' => array(
                                 array(
-                                    'table' => 'departments',
-                                    'condition'=>'departments.dep_id = users.dep_id'
+                                    'table' => 'categories s',
+                                    'condition'=>'s.cat_id = f.cat_parent',
+                                    'refby' => 'left'
                                  )
-                            ),
-                            'where' => array(
-                                'user_id !='=>1
                             )
                         ),
                         "columns" => array(
-                            "user_id" => "ID",
-                            "user_fullname" => "Name",
-                            "user_username" => "Username",
-                            "user_email" => "Email",
-                            "user_mobile" => "Mobile",
-                            "dep_name" => "Department",
-                            "user_status" => array(
+                            "cat_id" => "ID",
+                            "cat_name" => "Name",
+                            "cat_name_en" => "Name(EN)",
+                            "parent_name" => "Main Category",
+                            "cat_order" => array(
+                                "header" => "Order",
+                                "class" => "label",
+                                "value" => "<input type=\"text\" class=\"order_input\" name=\"order[]\" cat_id=\"{cat_id}\" id=\"order_{cat_id}\" value=\"{cat_order}\" >"
+                            ),
+                            "cat_status" => array(
                                 "header" => "Status",
                                 "class" => "label",
                                 "status" => array(
-                                    '<span class="label center change-status cursor" value="0" id="{user_id}">Inactive</span>',
-                                    '<span class="label label-success center change-status cursor" value="1" id="{user_id}">Active</span>',
-                                    '<span class="label label-important center change-status cursor" value="2" id="{user_id}">Banned</span>',
-                                    '<span class="label label-warning center change-status cursor" value="3" id="{user_id}">Pending</span>'
+                                    '<span class="label center change-status cursor" value="0" id="{cat_id}">Inactive</span>',
+                                    '<span class="label label-success center change-status cursor" value="1" id="{cat_id}">Active</span>',
+                                    '<span class="label label-important center change-status cursor" value="2" id="{cat_id}">Banned</span>',
+                                    '<span class="label label-warning center change-status cursor" value="3" id="{cat_id}">Pending</span>'
                                 )
                             )
                         ),
                         "displayaction" => true,
                         "actions" => array(
                             "create" => array(
-                                "url" => "employee/create"
-                            ),
-                            "view" => array(
-                                "url" => "employee/view/{user_id}"
+                                "url" => "categories/create"
                             ),
                             "edit" => array(
-                                "url" => "employee/edit/{user_id}"
+                                "url" => "categories/edit/{cat_id}"
                             ),
                             "delete" => array(
-                                "url" => "employee/delete/{user_id}"
+                                "url" => "categories/delete/{cat_id}"
                             )
                         )
                     ));
@@ -131,5 +135,29 @@
         </div><!--/fluid-row-->
         <div class="clearfix"></div>
         <?=$this->load->view('admin/footer');?>
+        <script>
+            $(function(){
+               $(".order_input").keyup(function(event){
+                   if(event.keyCode===13)
+                   {
+                       var catid = $(this).attr("cat_id");
+                       var order = $(this).val();
+                       
+                       $.ajax({
+                           url:"<?=site_url('admin/categories/updateorder');?>",
+                           type:"post",
+                           data:{cat_id:catid,cat_order:order},
+                           success:function(response){
+                               var res = $.parseJSON(response);
+                               if(res.status===true)
+                               {
+                                   window.location.href="";
+                               }
+                           }
+                       });
+                   }
+               }) ;
+            });
+        </script>
     </body>
 </html>

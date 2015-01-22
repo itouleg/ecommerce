@@ -64,7 +64,7 @@
                     <?php
                     $breadcrumb = array(
                         array("title" => "Shop"),
-                        array("title" => "Currency", "url" => "admin/currency"),
+                        array("title" => "Shipping Rates", "url" => "admin/shippingrates"),
                         array("title" => "Create"),
                     );
                     $this->load->library('breadcrumb', $breadcrumb);
@@ -73,7 +73,7 @@
                     <div class="row-fluid sortable">
                         <div class="box span12">
                             <div class="box-header" data-original-title>
-                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Create Bank</strong></h2>
+                                <h2><i class="halflings-icon edit"></i><span class="break"></span><strong>Create Shipping Rate</strong></h2>
                                 <div class="box-icon">
                                     <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
                                 </div>
@@ -84,35 +84,89 @@
                                     <fieldset>
                                         <div class="row">
                                             <div class="control-group span6">
-                                                <label class="control-label">Currency Name</label>
+                                                <label class="control-label">From</label>
                                                 <div class="controls">
-                                                    <input name="currency_name" id="currency_name" type="text" placeholder="e.g. Thai Baht" required>
+                                                    <select name="ship_from" id="ship_from" required>
+                                                        <option value="">-- Select Country --</option>
+                                                        <?php
+                                                        foreach($country as $con)
+                                                        {
+                                                            echo '<option value="'.$con['country_id'].'">'.$con['country_name'].'</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="control-group span6">
-                                                <label class="control-label">Rate</label>
+                                                <label class="control-label">To</label>
                                                 <div class="controls">
-                                                    <input name="currency_rate" id="currency_rate" type="text" placeholder="0.00" required>
+                                                    <select name="ship_to" id="ship_to" required>
+                                                        <option value="">-- Select Country --</option>
+                                                        <?php
+                                                        foreach($country as $con)
+                                                        {
+                                                            echo '<option value="'.$con['country_id'].'">'.$con['country_name'].'</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="control-group span6">
-                                                <label class="control-label">Code</label>
+                                                <label class="control-label">Type</label>
                                                 <div class="controls">
-                                                    <input name="currency_code" id="currency_code" type="text" placeholder="e.g. THB" required>
+                                                    <select name="ship_type" id="ship_type" required>
+                                                        <option value="">-- Select Type --</option>
+                                                        <?php
+                                                        foreach($masstype as $type)
+                                                        {
+                                                            echo '<option value="'.$type['mass_id'].'">'.$type['mass_name'].'</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="control-group span6">
-                                                <label class="control-label">Symbol</label>
+                                                <label class="control-label">By</label>
                                                 <div class="controls">
-                                                    <select name="currency_symbol" id="currency_symbol">
-                                                        <option value="฿">Baht (฿)</option>
-                                                        <option value="$">Dollar ($)</option>
-                                                        <option value="¥">Yuan (¥)</option>
-                                                        <option value="€">Euro (€)</option>
-                                                        <option value="£">Pound (£)</option>
+                                                    <select name="ship_by" id="ship_by" required>
+                                                        <option value="">-- Select By --</option>
+                                                        <?php
+                                                        foreach($massby as $by)
+                                                        {
+                                                            echo '<option value="'.$by['massby_id'].'">'.$by['massby_name'].'</option>';
+                                                        }
+                                                        ?>
                                                     </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="control-group span6">
+                                                <label class="control-label">Weight From(g.)</label>
+                                                <div class="controls">
+                                                    <input type="text" name="ship_weightfrom" id="ship_weightfrom" placeholder="0.00" required>
+                                                </div>
+                                            </div>
+                                            <div class="control-group span6">
+                                                <label class="control-label">Weight To(g.)</label>
+                                                <div class="controls">
+                                                    <input type="text" name="ship_weightto" id="ship_weightto" placeholder="0.00" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="control-group span6">
+                                                <label class="control-label">Price(THB)/g.</label>
+                                                <div class="controls">
+                                                    <input type="text" name="ship_price" id="ship_price" placeholder="0.00" required>
+                                                </div>
+                                            </div>
+                                            <div class="control-group span6">
+                                                <label class="control-label">Price(CNY)/g.</label>
+                                                <div class="controls">
+                                                    <input type="text" name="ship_price_yuan" id="ship_price_yuan" placeholder="0.00" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -120,7 +174,7 @@
                                             <div class="control-group span6">
                                                 <label class="control-label">Status</label>
                                                 <div class="controls">
-                                                    <select name="currency_status" id="currency_status">
+                                                    <select name="ship_status" id="ship_status">
                                                         <option value="1">Active</option>
                                                         <option value="0">Inactive</option>
                                                     </select>
